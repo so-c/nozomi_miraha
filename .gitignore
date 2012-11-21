@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+# gedit backup
+*~
+
+# configuration
+config.ini

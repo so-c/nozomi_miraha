@@ -1,0 +1,14 @@
+application: nozomimiraha
+version: 2
+runtime: python27
+api_version: go1
+threadsafe: true
+
+handlers:
+- url: /hello
+  script: helloworld.app
+  login: admin
+
+- url: /good-night
+  script: good_night.app
+  login: admin
