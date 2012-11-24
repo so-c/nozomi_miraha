@@ -6,9 +6,9 @@ threadsafe: true
 
 handlers:
 - url: /hello
-  script: helloworld.app
+  script: hello.app
   login: admin
 
 - url: /good-night
-  script: good_night.app
+  script: goodnight.app
   login: admin
