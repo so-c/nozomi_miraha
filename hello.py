@@ -1,5 +1,6 @@
 #coding: utf-8
 import sys
+import webapp2
 import random
 from models import Account
 from models import Weather
@@ -26,5 +27,5 @@ else:
     elif r == 2:
         msg = u'おはようございまーす♪'
 
-    account = Account()
-    account.tweet(msg)
+account = Account()
+account.tweet(msg)
