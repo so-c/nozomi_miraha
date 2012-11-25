@@ -1,9 +1,11 @@
 #coding: utf-8
-import sys
 import webapp2
 import random
-from models import Account
+from page import InfoPage
 from models import Weather
+from models import Account
+
+app = webapp2.WSGIApplication([('/hello', InfoPage)], debug=True)
 
 weather = Weather(63, 'today')
 telop = weather.get_telop()

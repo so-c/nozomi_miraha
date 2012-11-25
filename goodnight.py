@@ -1,6 +1,10 @@
 #coding: utf-8
+import webapp2
 import random
+from page import InfoPage
 from models import Account
+
+app = webapp2.WSGIApplication([('/good-night', InfoPage)], debug=True)
 
 random.seed()
 r = random.randint(0, 2)
