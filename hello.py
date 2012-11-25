@@ -1,4 +1,5 @@
 #coding: utf-8
+import sys
 import random
 from models import Account
 from models import Weather
@@ -6,9 +7,12 @@ from models import Weather
 weather = Weather(63, 'today')
 telop = weather.get_telop()
 
-
 if telop.find(u'雨') != -1:
     msg_tmpl = u'おはようございます。今日は{0}ですね。傘はお持ちですか? {1}'
+    msg = msg_tmpl.format(telop, weather.get_link())
+
+if telop.find(u'雪') != -1:
+    msg_tmpl = u'おはようございます。今日は{0}ですよ！ 暖かくしていってくださいね。 {1}'
     msg = msg_tmpl.format(telop, weather.get_link())
 
 else:
@@ -22,5 +26,5 @@ else:
     elif r == 2:
         msg = u'おはようございまーす♪'
 
-account = Account()
-account.tweet(msg)
+    account = Account()
+    account.tweet(msg)
