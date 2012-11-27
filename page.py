@@ -1,4 +1,4 @@
-#codnig: utf-8
+# codnig: utf-8
 import webapp2
 
 class InfoPage(webapp2.RequestHandler):

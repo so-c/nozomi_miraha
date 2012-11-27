@@ -1,4 +1,4 @@
-#coding: utf-8
+# coding: utf-8
 from google.appengine.api import mail
 from xml.dom import minidom
 from tweepy.error import TweepError

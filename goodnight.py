@@ -1,4 +1,4 @@
-#coding: utf-8
+# coding: utf-8
 import webapp2
 import random
 from page import InfoPage
