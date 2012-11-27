@@ -89,5 +89,40 @@ class Blog:
         title_elem = self.feed.getElementsByTagName('title')[0]
         self.title = title_elem.firstChild.data
 
+        post_elems = self.feed.getElementsByTagName('entry')
+        num_posts = len(post_elems)
+        self.posts = []
+        for i in range(num_posts):
+            post = Post(post_elems[i])
+            self.posts.append(post)
+
     def get_title(self):
         return self.title
+
+    def get_posts(self):
+        return self.posts
+
+# Post class
+class Post:
+    def __init__(self, entry_elem):
+        title_elem = entry_elem.getElementsByTagName('title')[0]
+        self.title = title_elem.firstChild.data
+
+        category_elems = entry_elem.getElementsByTagName('category')
+        self.categories = []
+        num_categories = len(category_elems)
+        for i in range(num_categories):
+            attr = category_elems[i].getAttributeNode('term')
+            self.categories.append(attr.nodeValue)
+
+        link = entry_elem.getElementsByTagName('feedburner:origLink')[0]
+        self.link = link.firstChild.data
+
+    def get_title(self):
+        return self.title
+
+    def get_categories(self):
+        return self.categories
+
+    def get_link(self):
+        return self.link
