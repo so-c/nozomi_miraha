@@ -80,3 +80,14 @@ class Weather:
     def get_pref(self):
         location = self.weather_xml.getElementsByTagName('location')[0]
         return location.attributes['pref'].value
+
+# Blogg class including 25 posts
+class Blog:
+
+    def __init__(self, url):
+        self.feed = minidom.parse(urllib2.urlopen(url))
+        title_elem = self.feed.getElementsByTagName('title')[0]
+        self.title = title_elem.firstChild.data
+
+    def get_title(self):
+        return self.title
