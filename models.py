@@ -103,6 +103,13 @@ class Blog:
     def get_posts(self):
         return self.posts
 
+    def select_posts_bytag(self, tag):
+        selected = []
+        for p in self.posts:
+            if tag in p.tags:
+                selected.append(p)
+        return selected
+
 # Post class
 class Post:
     def __init__(self, entry_elem):

@@ -34,14 +34,14 @@ class TestPost(unittest.TestCase):
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        print post.get_content()
+        self.assertTrue(post.get_content().startswith('<a href='))
 
     def test_get_nozomi_dialgs(self):
         d = feedparser.parse('tests/data/feed.xml')
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        self.assertMultiLineEqual(post.get_nozomi_dialog()[0],
+        self.assertMultiLineEqual(post.get_nozomi_dialogs()[0],
             u'「原種・亜種と同じく飛び回ったり走り回ったりして追うのが大変なのに、希少種ときたら頭も硬いのが厄介ですよね」')
 
 if __name__ == '__main__':
