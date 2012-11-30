@@ -3,6 +3,7 @@ from google.appengine.api import mail
 from xml.dom import minidom
 from tweepy.error import TweepError
 import ConfigParser
+import feedparser
 import tweepy
 import urllib2
 
@@ -85,11 +86,10 @@ class Weather:
 class Blog:
 
     def __init__(self, url):
-        self.feed = minidom.parse(urllib2.urlopen(url))
-        title_elem = self.feed.getElementsByTagName('title')[0]
-        self.title = title_elem.firstChild.data
+        self.d = feedparser.parse(url)
+        self.title = self.d.feed.title
 
-        post_elems = self.feed.getElementsByTagName('entry')
+        post_elems = self.d.entries
         num_posts = len(post_elems)
         self.posts = []
         for i in range(num_posts):
@@ -105,24 +105,22 @@ class Blog:
 # Post class
 class Post:
     def __init__(self, entry_elem):
-        title_elem = entry_elem.getElementsByTagName('title')[0]
-        self.title = title_elem.firstChild.data
+        self.title = entry_elem.title
 
-        category_elems = entry_elem.getElementsByTagName('category')
-        self.categories = []
-        num_categories = len(category_elems)
-        for i in range(num_categories):
-            attr = category_elems[i].getAttributeNode('term')
-            self.categories.append(attr.nodeValue)
+        tag_elems = entry_elem.tags
+        self.tags = []
+        num_tags = len(tag_elems)
+        for i in range(num_tags):
+            attr = tag_elems[i].term
+            self.tags.append(attr)
 
-        link = entry_elem.getElementsByTagName('feedburner:origLink')[0]
-        self.link = link.firstChild.data
+        self.link = entry_elem.feedburner_origlink
 
     def get_title(self):
         return self.title
 
-    def get_categories(self):
-        return self.categories
+    def get_tags(self):
+        return self.tags
 
     def get_link(self):
         return self.link
