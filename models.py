@@ -2,6 +2,7 @@
 from google.appengine.api import mail
 from xml.dom import minidom
 from tweepy.error import TweepError
+from util import MirahaParser
 import ConfigParser
 import feedparser
 import tweepy
@@ -116,6 +117,8 @@ class Post:
 
         self.link = entry_elem.feedburner_origlink
 
+        self.content = entry_elem.content[0].value
+
     def get_title(self):
         return self.title
 
@@ -124,3 +127,11 @@ class Post:
 
     def get_link(self):
         return self.link
+
+    def get_content(self):
+        return self.content
+
+    def get_nozomi_dialogs(self):
+        parser = MirahaParser()
+        parser.feed(self.content)
+        return parser.dialogs

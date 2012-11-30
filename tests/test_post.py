@@ -29,5 +29,20 @@ class TestPost(unittest.TestCase):
         self.assertMultiLineEqual(post.get_link(),
             u'http://mirahalibrary.blogspot.com/2012/11/blog-post_22.html')
 
+    def test_get_content(self):
+        d = feedparser.parse('tests/data/feed.xml')
+        entry_elem = d.entries[0]
+
+        post = Post(entry_elem)
+        print post.get_content()
+
+    def test_get_nozomi_dialgs(self):
+        d = feedparser.parse('tests/data/feed.xml')
+        entry_elem = d.entries[0]
+
+        post = Post(entry_elem)
+        self.assertMultiLineEqual(post.get_nozomi_dialog()[0],
+            u'「原種・亜種と同じく飛び回ったり走り回ったりして追うのが大変なのに、希少種ときたら頭も硬いのが厄介ですよね」')
+
 if __name__ == '__main__':
     unittest.main()
