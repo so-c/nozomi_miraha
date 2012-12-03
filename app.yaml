@@ -13,6 +13,10 @@ handlers:
   script: goodnight.app
   login: admin
 
+- url: /quote
+  script: quote.app
+  login: admin
+
 libraries:
 - name: webapp2
   version: "2.5.1"
