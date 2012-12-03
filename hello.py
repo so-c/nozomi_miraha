@@ -13,11 +13,9 @@ telop = weather.get_telop()
 if telop.find(u'雨') != -1:
     msg_tmpl = u'おはようございます。今日は{0}ですね。傘はお持ちですか? {1}'
     msg = msg_tmpl.format(telop, weather.get_link())
-
-if telop.find(u'雪') != -1:
+elif telop.find(u'雪') != -1:
     msg_tmpl = u'おはようございます。今日は{0}ですよ！ 暖かくしていってくださいね。 {1}'
     msg = msg_tmpl.format(telop, weather.get_link())
-
 else:
     random.seed()
     r = random.randint(0, 2)
