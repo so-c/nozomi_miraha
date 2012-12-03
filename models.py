@@ -4,7 +4,7 @@ from xml.dom import minidom
 from tweepy.error import TweepError
 from util import MirahaParser
 import ConfigParser
-import feedparser
+from lib import feedparser
 import tweepy
 import urllib2
 
