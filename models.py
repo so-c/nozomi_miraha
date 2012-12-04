@@ -7,6 +7,7 @@ import ConfigParser
 from lib import feedparser
 import tweepy
 import urllib2
+import logging
 
 CONFIG_FILE = 'config.ini'
 
@@ -30,6 +31,7 @@ class Account:
     def tweet(self, message):
         try:
             self.api.update_status(message)
+            logging.info("tweeted " + message)
         except TweepError as e:
             message = ErrorNotifier()
             error_message = '{0} when tweet "{1}"'.format(e.reason, message)
