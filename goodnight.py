@@ -1,7 +1,6 @@
 # coding: utf-8
 import webapp2
 import random
-from page import InfoPage
 from models import Account
 
 class GoodNight(webapp2.RequestHandler):

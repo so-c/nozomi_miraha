@@ -1,7 +1,6 @@
 # coding: utf-8
 import webapp2
 import random
-from page import InfoPage
 from models import Account
 from models import Blog
 from models import Post
