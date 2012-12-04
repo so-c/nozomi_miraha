@@ -22,10 +22,16 @@ class Quote(webapp2.RequestHandler):
             lr = random.randint(0, len(lines) - 1)
             line = lines[lr]
 
-            len_limit = 140 - 20 - 1# TODO remove magic number
-            msg = line[0:len_limit] + ' ' + post.get_link()
+            msg = shorten_msg(line) + ' ' + post.get_link()
 
         account = Account()
         account.tweet(msg)
+
+    def shorten_msg(self, line):
+        len_limit = 140 - 20 - 1  # XXX remove magic number
+        if(len(line) <= len_limit):
+            return line
+        else:
+            return line[0:(len_limit - 2)] + u'…」'
 
 app = webapp2.WSGIApplication([('/quote', Quote)], debug=True)
