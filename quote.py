@@ -15,17 +15,23 @@ class Quote(webapp2.RequestHandler):
             # TODO 引用するつぶやきがない場合
             pass
         else:
-            pr = random.randint(0, len_posts - 1)
-            post = posts[pr]
+            pairs = []
+            for p in posts:
+                dialogs = p.get_nozomi_dialogs()
+                for d in dialogs:
+                    pairs.append((d, p.get_link()))
 
-            lines = post.get_nozomi_dialogs()
-            lr = random.randint(0, len(lines) - 1)
-            line = lines[lr]
+            lr = random.randint(0, len(pairs) - 1)
+            line = pairs[lr][0]
+            link = pairs[lr][1]
 
-            msg = shorten_msg(line) + ' ' + post.get_link()
+            msg = self.shorten_msg(line) + ' ' + link
+
+            self.response.headers['Content-Type'] = 'text/plain'
+            self.response.write(msg)
 
         account = Account()
-        account.tweet(msg)
+        # account.tweet(msg)
 
     def shorten_msg(self, line):
         len_limit = 140 - 20 - 1  # XXX remove magic number
