@@ -27,11 +27,8 @@ class Quote(webapp2.RequestHandler):
 
             msg = self.shorten_msg(line) + ' ' + link
 
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write(msg)
-
         account = Account()
-        # account.tweet(msg)
+        account.tweet(msg)
 
     def shorten_msg(self, line):
         len_limit = 140 - 20 - 1  # XXX remove magic number
