@@ -13,7 +13,7 @@ class Quote(webapp2.RequestHandler):
 
         msg = self.sample_msg(posts)
         account = Account()
-        last_status = account.api.user_timeline(count=1)[0].text
+        last_status = account.last_tweet()
 
         logging.info('last status: ' + last_status)
         logging.info('msg: ' + msg)
