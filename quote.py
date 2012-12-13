@@ -11,23 +11,22 @@ class Quote(webapp2.RequestHandler):
         blog = Blog('http://mirahalibrary.blogspot.com/feeds/posts/default')
         posts = blog.select_posts_bytag(u'鏡館')
 
-        msg = self.sample_msg(posts)
         account = Account()
-        last_status = account.last_tweet()
+        last_tweet = account.last_tweet()
 
-        logging.info('last status: ' + last_status)
-        logging.info('msg: ' + msg)
-
-        i = 0
-        while msg == last_status and i < 10:
-            msg = self.sample_msg(posts)
-            logging.info('msg: ' + msg)
-            i += 1
-
-        if i == 10:
-            msg = u'前回と違うつぶやきが見つかりません……。'
+        msg = self.unduplicate_msg(last_tweet, posts)
 
         account.tweet(msg)
+
+    def unduplicate_msg(self, last_tweet, posts):
+        msg = self.sample_msg(posts)
+        i = 0
+        while msg == last_tweet and i < 10:
+            msg = self.sample_msg(posts)
+            i += 1
+        if i == 10:
+            msg = u'前回と違うつぶやきが見つかりません……。'
+        return msg
 
     def sample_msg(self, posts):
         len_posts = len(posts)
