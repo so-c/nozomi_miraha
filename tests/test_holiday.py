@@ -3,7 +3,7 @@ import unittest
 from util import Holiday
 import datetime
 
-class TestQuote(unittest.TestCase):
+class TestHoliday(unittest.TestCase):
     def test_isholidy(self):
         holiday = Holiday()
         actual = holiday.isholiday(datetime.date(2012, 1, 2))
