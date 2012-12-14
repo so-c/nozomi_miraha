@@ -18,7 +18,7 @@ class GoodNight(webapp2.RequestHandler):
         elif r == 2:
             msg = u'そろそろ寝ることにします。おやすみなさい。'
 
-        d = datetime.datetime.now() + datetime.timedelta(days=1)
+        d = datetime.datetime.now() + datetime.timedelta(days=1, hours=9)  # XXX
         logging.info('now: ' + d.isoformat())
         logging.info('now: ' + str(d.weekday()))
 

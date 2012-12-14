@@ -3,7 +3,7 @@ from HTMLParser import HTMLParser
 import datetime
 import ConfigParser
 import urllib2
-import simplejson
+from django.utils import simplejson
 
 class MirahaParser(HTMLParser):
     def __init__(self):
