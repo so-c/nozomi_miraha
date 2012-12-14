@@ -1,5 +1,9 @@
 # coding: utf-8
 from HTMLParser import HTMLParser
+import datetime
+import ConfigParser
+import urllib2
+import simplejson
 
 class MirahaParser(HTMLParser):
     def __init__(self):
@@ -23,3 +27,31 @@ class MirahaParser(HTMLParser):
     def handle_data(self, data):
         if self.__is_nozomi:
             self.__current_str += data
+
+class Holiday():
+    def __init__(self):
+        config = ConfigParser.SafeConfigParser()
+        CONFIG_FILE = 'config.ini'
+        config.read(CONFIG_FILE)
+
+        baseurl = 'https://www.googleapis.com/calendar/v3/calendars/'
+        calendarid = 'ja.japanese%23holiday@group.v.calendar.google.com'
+        key = config.get('google', 'key')
+        self.url = baseurl + calendarid + '/events' + '?key=' + key
+
+    def isholiday(self, dt):
+        req = self.buildurl(dt)
+        js = simplejson.load(urllib2.urlopen(req))
+        if 'items' in js:
+            return js['items'][0]['summary']
+        else:
+            return ''
+
+    def buildurl(self, dt):
+        d = datetime.datetime(dt.year, dt.month, dt.day, 0, 0, 0, 0)
+        timemin = 'timeMin=' + d.isoformat() + 'Z'
+        timemax = 'timeMax=' + (d + datetime.timedelta(days=1)).isoformat() + 'Z'
+        maxresults = 'maxResults=' + '1'
+        singleevents = 'singleEvents=' + 'true'
+        req = '&'.join([self.url, timemin, timemax, maxresults, singleevents])
+        return req
