@@ -130,7 +130,7 @@ class Post:
             attr = tag_elems[i].term
             self.__tags.append(attr)
 
-        self.link = entry_elem.feedburner_origlink
+        self.__link = entry_elem.feedburner_origlink
 
         self.content = entry_elem.content[0].value
 
@@ -142,8 +142,9 @@ class Post:
     def tags(self):
         return self.__tags
 
-    def get_link(self):
-        return self.link
+    @property
+    def link(self):
+        return self.__link
 
     def get_content(self):
         return self.content

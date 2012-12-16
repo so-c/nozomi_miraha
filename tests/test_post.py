@@ -21,12 +21,12 @@ class TestPost(unittest.TestCase):
         self.assertMultiLineEqual(tags[0], u'鏡館')
         self.assertMultiLineEqual(tags[1], u'写真')
 
-    def test_get_link(self):
+    def test_link(self):
         d = feedparser.parse('tests/data/feed.xml')
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        self.assertMultiLineEqual(post.get_link(),
+        self.assertMultiLineEqual(post.link,
             u'http://mirahalibrary.blogspot.com/2012/11/blog-post_22.html')
 
     def test_get_content(self):

@@ -37,7 +37,7 @@ class Quote(webapp2.RequestHandler):
             for p in posts:
                 dialogs = p.get_nozomi_dialogs()
                 for d in dialogs:
-                    pairs.append((d, p.get_link()))
+                    pairs.append((d, p.link))
 
             lr = random.randint(0, len(pairs) - 1)
             line = pairs[lr][0]
