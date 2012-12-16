@@ -132,7 +132,7 @@ class Post:
 
         self.__link = entry_elem.feedburner_origlink
 
-        self.content = entry_elem.content[0].value
+        self.__content = entry_elem.content[0].value
 
     @property
     def title(self):
@@ -146,8 +146,9 @@ class Post:
     def link(self):
         return self.__link
 
-    def get_content(self):
-        return self.content
+    @property
+    def content(self):
+        return self.__content
 
     def get_nozomi_dialogs(self):
         parser = MirahaParser()

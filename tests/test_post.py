@@ -29,12 +29,12 @@ class TestPost(unittest.TestCase):
         self.assertMultiLineEqual(post.link,
             u'http://mirahalibrary.blogspot.com/2012/11/blog-post_22.html')
 
-    def test_get_content(self):
+    def test_content(self):
         d = feedparser.parse('tests/data/feed.xml')
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        self.assertTrue(post.get_content().startswith('<a href='))
+        self.assertTrue(post.content.startswith('<a href='))
 
     def test_get_nozomi_dialgs(self):
         d = feedparser.parse('tests/data/feed.xml')
