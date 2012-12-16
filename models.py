@@ -121,7 +121,7 @@ class Blog:
 # Post class
 class Post:
     def __init__(self, entry_elem):
-        self.title = entry_elem.title
+        self.__title = entry_elem.title
 
         tag_elems = entry_elem.tags
         self.tags = []
@@ -134,8 +134,9 @@ class Post:
 
         self.content = entry_elem.content[0].value
 
-    def get_title(self):
-        return self.title
+    @property
+    def title(self):
+        return self.__title
 
     def get_tags(self):
         return self.tags

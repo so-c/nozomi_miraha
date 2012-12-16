@@ -5,12 +5,12 @@ from xml.dom import minidom
 import feedparser
 
 class TestPost(unittest.TestCase):
-    def test_get_title(self):
+    def test_title(self):
         d = feedparser.parse('tests/data/feed.xml')
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        self.assertMultiLineEqual(post.get_title(), u'世界の終わり')
+        self.assertMultiLineEqual(post.title, u'世界の終わり')
 
     def test_get_tags(self):
         d = feedparser.parse('tests/data/feed.xml')

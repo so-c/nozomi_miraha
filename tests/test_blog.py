@@ -11,7 +11,7 @@ class TestBlog(unittest.TestCase):
         blog = Blog('tests/data/feed.xml')
         post = blog.posts[0]
 
-        self.assertMultiLineEqual(post.get_title(), u'世界の終わり')
+        self.assertMultiLineEqual(post.title, u'世界の終わり')
         self.assertMultiLineEqual(post.get_tags()[0], u'鏡館')
         self.assertMultiLineEqual(post.get_tags()[1], u'写真')
 
