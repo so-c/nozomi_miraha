@@ -63,7 +63,7 @@ class ErrorNotifier:
 # Weather info
 # see http://weather.livedoor.com/weather_hacks/webservice.html
 class Weather:
-    API_URL = 'http://weather.livedoor.com/forecast/webservice/rest/v1?city={0}&day={1}'
+    __API_URL = 'http://weather.livedoor.com/forecast/webservice/rest/v1?city={0}&day={1}'
 
     def __init__(self, city_id, day):
         options = ['today', 'tomorrow', 'dayaftertomorrow']
@@ -71,22 +71,22 @@ class Weather:
         if day not in options:
             raise ValueError(error_message)
 
-        self.city_id = city_id
-        self.day = day
+        self.__city_id = city_id
+        self.__day = day
 
-        self.weather_xml = minidom.parse(urllib2.urlopen(self.get_url()))
+        self.__weather_xml = minidom.parse(urllib2.urlopen(self.get_url()))
 
     def get_url(self):
-        return self.API_URL.format(self.city_id, self.day)
+        return self.__API_URL.format(self.__city_id, self.__day)
 
     def get_telop(self):
-        return self.weather_xml.getElementsByTagName('telop')[0].firstChild.data
+        return self.__weather_xml.getElementsByTagName('telop')[0].firstChild.data
 
     def get_link(self):
-        return self.weather_xml.getElementsByTagName('link')[0].firstChild.data
+        return self.__weather_xml.getElementsByTagName('link')[0].firstChild.data
 
     def get_pref(self):
-        location = self.weather_xml.getElementsByTagName('location')[0]
+        location = self.__weather_xml.getElementsByTagName('location')[0]
         return location.attributes['pref'].value
 
 # Blogg class including 25 posts
