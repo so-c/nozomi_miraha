@@ -33,11 +33,8 @@ class Quote(webapp2.RequestHandler):
         if len_posts <= 0:
             return u'最近は、鏡館に遊びに行っていないです。久しぶりに行ってみようかな？'
         else:
-            pairs = []
             for p in posts:
-                dialogs = p.get_nozomi_dialogs()
-                for d in dialogs:
-                    pairs.append((d, p.link))
+                pairs = [(d, p.link) for d in p.get_nozomi_dialogs()]
 
             lr = random.randint(0, len(pairs) - 1)
             line = pairs[lr][0]
