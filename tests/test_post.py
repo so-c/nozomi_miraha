@@ -12,12 +12,12 @@ class TestPost(unittest.TestCase):
         post = Post(entry_elem)
         self.assertMultiLineEqual(post.title, u'世界の終わり')
 
-    def test_get_tags(self):
+    def test_tags(self):
         d = feedparser.parse('tests/data/feed.xml')
         entry_elem = d.entries[0]
 
         post = Post(entry_elem)
-        tags = post.get_tags()
+        tags = post.tags
         self.assertMultiLineEqual(tags[0], u'鏡館')
         self.assertMultiLineEqual(tags[1], u'写真')
 

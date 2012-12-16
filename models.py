@@ -124,11 +124,11 @@ class Post:
         self.__title = entry_elem.title
 
         tag_elems = entry_elem.tags
-        self.tags = []
+        self.__tags = []
         num_tags = len(tag_elems)
         for i in range(num_tags):
             attr = tag_elems[i].term
-            self.tags.append(attr)
+            self.__tags.append(attr)
 
         self.link = entry_elem.feedburner_origlink
 
@@ -138,8 +138,9 @@ class Post:
     def title(self):
         return self.__title
 
-    def get_tags(self):
-        return self.tags
+    @property
+    def tags(self):
+        return self.__tags
 
     def get_link(self):
         return self.link
