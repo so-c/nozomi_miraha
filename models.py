@@ -97,11 +97,7 @@ class Blog:
         self.__title = self.__d.feed.title
 
         post_elems = self.__d.entries
-        num_posts = len(post_elems)
-        self.__posts = []
-        for i in range(num_posts):
-            post = Post(post_elems[i])
-            self.__posts.append(post)
+        self.__posts = [Post(p) for p in post_elems]
 
     @property
     def title(self):
@@ -112,26 +108,15 @@ class Blog:
         return self.__posts
 
     def select_posts_bytag(self, tag):
-        selected = []
-        for p in self.__posts:
-            if tag in p.tags:
-                selected.append(p)
+        selected = [p for p in self.__posts if tag in p.tags]
         return selected
 
 # Post class
 class Post:
     def __init__(self, entry_elem):
         self.__title = entry_elem.title
-
-        tag_elems = entry_elem.tags
-        self.__tags = []
-        num_tags = len(tag_elems)
-        for i in range(num_tags):
-            attr = tag_elems[i].term
-            self.__tags.append(attr)
-
+        self.__tags = [t.term for t in entry_elem.tags]
         self.__link = entry_elem.feedburner_origlink
-
         self.__content = entry_elem.content[0].value
 
     @property
