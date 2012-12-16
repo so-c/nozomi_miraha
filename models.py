@@ -49,16 +49,16 @@ class ErrorNotifier:
         config = ConfigParser.SafeConfigParser()
         config.read(CONFIG_FILE)
 
-        self.message = mail.EmailMessage()
-        self.message.subject = config.get('mail', 'subject')
-        self.message.sender  = config.get('mail', 'from')
-        self.message.to      = config.get('mail', 'to')
+        self.__message = mail.EmailMessage()
+        self.__message.subject = config.get('mail', 'subject')
+        self.__message.sender  = config.get('mail', 'from')
+        self.__message.to      = config.get('mail', 'to')
 
     # send email.
     def notify_error(self, body):
-        self.message.body = body
-        self.message.check_initialized()
-        self.message.send()
+        self.__message.body = body
+        self.__message.check_initialized()
+        self.__message.send()
 
 # Weather info
 # see http://weather.livedoor.com/weather_hacks/webservice.html
