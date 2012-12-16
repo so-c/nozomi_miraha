@@ -3,9 +3,9 @@ import unittest
 from models import Blog
 
 class TestBlog(unittest.TestCase):
-    def test_get_title(self):
+    def test_title(self):
         blog = Blog('tests/data/feed.xml')
-        self.assertMultiLineEqual(blog.get_title(), 'Mirror House Annex')
+        self.assertMultiLineEqual(blog.title, 'Mirror House Annex')
 
     def test_get_posts(self):
         blog = Blog('tests/data/feed.xml')

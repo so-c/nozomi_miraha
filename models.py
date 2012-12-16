@@ -93,25 +93,26 @@ class Weather:
 class Blog:
 
     def __init__(self, url):
-        self.d = feedparser.parse(url)
-        self.title = self.d.feed.title
+        self.__d = feedparser.parse(url)
+        self.__title = self.__d.feed.title
 
-        post_elems = self.d.entries
+        post_elems = self.__d.entries
         num_posts = len(post_elems)
-        self.posts = []
+        self.__posts = []
         for i in range(num_posts):
             post = Post(post_elems[i])
-            self.posts.append(post)
+            self.__posts.append(post)
 
-    def get_title(self):
-        return self.title
+    @property
+    def title(self):
+        return self.__title
 
     def get_posts(self):
-        return self.posts
+        return self.__posts
 
     def select_posts_bytag(self, tag):
         selected = []
-        for p in self.posts:
+        for p in self.__posts:
             if tag in p.tags:
                 selected.append(p)
         return selected
