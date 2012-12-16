@@ -107,7 +107,8 @@ class Blog:
     def title(self):
         return self.__title
 
-    def get_posts(self):
+    @property
+    def posts(self):
         return self.__posts
 
     def select_posts_bytag(self, tag):

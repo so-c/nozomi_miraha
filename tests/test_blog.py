@@ -7,15 +7,15 @@ class TestBlog(unittest.TestCase):
         blog = Blog('tests/data/feed.xml')
         self.assertMultiLineEqual(blog.title, 'Mirror House Annex')
 
-    def test_get_posts(self):
+    def test_posts(self):
         blog = Blog('tests/data/feed.xml')
-        post = blog.get_posts()[0]
+        post = blog.posts[0]
 
         self.assertMultiLineEqual(post.get_title(), u'世界の終わり')
         self.assertMultiLineEqual(post.get_tags()[0], u'鏡館')
         self.assertMultiLineEqual(post.get_tags()[1], u'写真')
 
-    def test_get_posts(self):
+    def test_get_select_posts_bytag(self):
         blog = Blog('tests/data/feed.xml')
 
         selected = blog.select_posts_bytag(u'鏡館')

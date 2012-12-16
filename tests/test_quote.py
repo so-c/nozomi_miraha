@@ -18,7 +18,7 @@ class TestQuote(unittest.TestCase):
 
     def test_unduplicate_msg(self):
         blog = Blog('tests/data/feed.xml')
-        post = blog.get_posts()[0]
+        post = blog.posts[0]
         post.content = u'<div class="nozomi">duplicates</div>'
         post.link = 'http://hoge.com/fuga.html'
 
