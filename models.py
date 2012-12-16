@@ -25,12 +25,12 @@ class Account:
 
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
-        self.api = tweepy.API(auth_handler=auth)
+        self.__api = tweepy.API(auth_handler=auth)
 
     # tweet a messge.
     def tweet(self, message):
         try:
-            self.api.update_status(message)
+            self.__api.update_status(message)
             logging.info("tweeted " + message)
         except TweepError as e:
             message = ErrorNotifier()
@@ -40,7 +40,7 @@ class Account:
 
     # get the last own status.
     def last_tweet(self):
-        return self.api.user_timeline(count=1)[0].text
+        return self.__api.user_timeline(count=1)[0].text
 
 # Error notifier by email
 class ErrorNotifier:
