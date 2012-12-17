@@ -39,8 +39,8 @@ class Account:
             raise
 
     # get the last own status.
-    def last_tweet(self):
-        return self.__api.user_timeline(count=1)[0].text
+    def last_tweets(self, count=1):
+        return self.__api.user_timeline(count)
 
 # Error notifier by email
 class ErrorNotifier:

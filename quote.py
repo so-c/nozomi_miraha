@@ -12,16 +12,16 @@ class Quote(webapp2.RequestHandler):
         posts = blog.select_posts_bytag(u'鏡館')
 
         account = Account()
-        last_tweet = account.last_tweet()
+        last_tweets = account.last_tweets()
 
-        msg = self.unduplicate_msg(last_tweet, posts)
+        msg = self.unduplicate_msg(last_tweets, posts)
 
         account.tweet(msg)
 
-    def unduplicate_msg(self, last_tweet, posts):
+    def unduplicate_msg(self, last_tweets, posts):
         msg = self.sample_msg(posts)
         i = 0
-        while msg == last_tweet and i < 10:
+        while msg in last_tweets and i < 10:
             msg = self.sample_msg(posts)
             i += 1
         if i == 10:
