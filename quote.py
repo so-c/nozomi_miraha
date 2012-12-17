@@ -4,6 +4,7 @@ import random
 from models import Account
 from models import Blog
 from models import Post
+from tweepy import TweepError
 import logging
 
 class Quote(webapp2.RequestHandler):
@@ -14,9 +15,19 @@ class Quote(webapp2.RequestHandler):
         account = Account()
         last_tweets = account.last_tweets()
 
-        msg = self.unduplicate_msg(last_tweets, posts)
+        msg = self.sample_msg(posts)
 
-        account.tweet(msg)
+        try:
+            account.tweet(msg)
+        except TweepError as e:
+            reason = 'Status is a duplicate.'
+            if e.response.status == 403 and e.reason == reason:
+                logging.info('retry because {0}'.format(reason))
+                last_tweets = account.last_tweets(20)
+                msg = self.unduplicate_msg(last_tweets, posts)
+                account.tweet(msg)
+            else:
+                raise
 
     def unduplicate_msg(self, last_tweets, posts):
         msg = self.sample_msg(posts)
