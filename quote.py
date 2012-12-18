@@ -20,7 +20,7 @@ class Quote(webapp2.RequestHandler):
         except TweepError as e:
             reason = 'Status is a duplicate.'
             if e.response.status == 403 and e.reason == reason:
-                logging.info('retry because {0}: {1}'.format(reason, msg))
+                logging.info(u'retry because {0}: {1}'.format(reason, msg))
                 last_tweets = account.last_tweets(20)
                 msg = self.unduplicate_msg(last_tweets, posts)
                 account.tweet(msg)
