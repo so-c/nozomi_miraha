@@ -11,18 +11,16 @@ class Quote(webapp2.RequestHandler):
     def get(self):
         blog = Blog('http://mirahalibrary.blogspot.com/feeds/posts/default')
         posts = blog.select_posts_bytag(u'鏡館')
+        msg = self.sample_msg(posts)
 
         account = Account()
-        last_tweets = account.last_tweets()
-
-        msg = self.sample_msg(posts)
 
         try:
             account.tweet(msg)
         except TweepError as e:
             reason = 'Status is a duplicate.'
             if e.response.status == 403 and e.reason == reason:
-                logging.info('retry because {0}'.format(reason))
+                logging.info('retry because {0}: {1}'.format(reason, msg))
                 last_tweets = account.last_tweets(20)
                 msg = self.unduplicate_msg(last_tweets, posts)
                 account.tweet(msg)
