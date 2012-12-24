@@ -19,8 +19,6 @@ class GoodNight(webapp2.RequestHandler):
             msg = u'そろそろ寝ることにします。おやすみなさい。'
 
         d = datetime.datetime.now() + datetime.timedelta(days=1, hours=9)  # XXX
-        logging.info('now: ' + d.isoformat())
-        logging.info('now: ' + str(d.weekday()))
 
         if d.weekday() == 5:
             msg += u'明日は土曜日、お休みですね。'
@@ -29,7 +27,7 @@ class GoodNight(webapp2.RequestHandler):
         else:
             holiday = Holiday().isholiday(d)
             if holiday != '':
-                msg += '明日は' + holiday + '、お休みですね。'
+                msg += u'明日は' + holiday + u'でお休みですね。'
 
         account = Account()
         account.tweet(msg)
