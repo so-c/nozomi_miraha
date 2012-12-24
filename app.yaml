@@ -17,6 +17,10 @@ handlers:
   script: quote.app
   login: admin
 
+- url: /refollow
+  script: refollow.app
+  login: admin
+
 libraries:
 - name: webapp2
   version: "2.5.1"
