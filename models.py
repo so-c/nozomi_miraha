@@ -42,6 +42,14 @@ class Account:
     def last_tweets(self, count=1):
         return [s.text for s in self.__api.user_timeline(count=count)]
 
+    # refollow followees
+    def refollow(self):
+        followees_ids = set(self.__api.followers_ids())
+        followings_ids = set(self.__api.friends_ids())
+
+        for f in followees_ids - followings_ids:
+            self.__api.create_friendship(f)
+
 # Error notifier by email
 class ErrorNotifier:
 
