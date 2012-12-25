@@ -3,6 +3,7 @@ from HTMLParser import HTMLParser
 import datetime
 import ConfigParser
 import urllib2
+import re
 from django.utils import simplejson
 
 class MirahaParser(HTMLParser):
@@ -55,3 +56,13 @@ class Holiday():
         singleevents = 'singleEvents=' + 'true'
         req = '&'.join([self.url, timemin, timemax, maxresults, singleevents])
         return req
+
+class GreetingExpression():
+    def __init__(self):
+        self.__morning_ge1 = re.compile(u'(おはよう?|オハヨウ?)(ー|〜)?')
+        self.__morning_ge2 = re.compile(u'ぐっど?もーにんぐ?|グッド?モーニング?')
+
+    def ismorninggreeting(self, text):
+        is1 = self.__morning_ge1.search(text) != None
+        is2 = self.__morning_ge2.search(text) != None
+        return is1 or is2
