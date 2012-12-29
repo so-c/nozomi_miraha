@@ -55,10 +55,8 @@ class Account:
         followings_ids = self.__api.friends_ids()
         id_tweets = dict()
         for f in followings_ids:
-            tweets = []
-            for t in self.__api.get_user(f).timeline():
-                tweets.append((t.id, t.text))
-            id_tweets[f] = tweets
+            tweets = self.__api.get_user(f).timeline()
+            id_tweets[f] = [(t.id, t.text) for t in tweets]
         return id_tweets
 
     # get following user's id -> name dictionary
