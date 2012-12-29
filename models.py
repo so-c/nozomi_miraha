@@ -50,6 +50,25 @@ class Account:
         for f in followees_ids - followings_ids:
             self.__api.create_friendship(f)
 
+    # get following users id -> tweets dictionary
+    def followings_timeline(self):
+        followings_ids = self.__api.friends_ids()
+        id_tweets = dict()
+        for f in followings_ids:
+            tweets = []
+            for t in self.__api.get_user(f).timeline():
+                tweets.append((t.id, t.text))
+            id_tweets[f] = tweets
+        return id_tweets
+
+    # get following user's id -> name dictionary
+    def followings_name(self):
+        followings_ids = self.__api.friends_ids()
+        id_names = dict()
+        for i in followings_ids:
+            id_names[i] = self.__api.get_user(i).name
+        return id_names
+
 # Error notifier by email
 class ErrorNotifier:
 
