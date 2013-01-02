@@ -67,6 +67,14 @@ class Account:
             id_names[i] = self.__api.get_user(i).name
         return id_names
 
+    # get following user's id -> screenname dictionary
+    def followings_screen_name(self):
+        followings_ids = self.__api.friends_ids()
+        id_screen_names = dict()
+        for i in followings_ids:
+            id_screen_names[i] = self.__api.get_user(i).screen_name
+        return id_screen_names
+
 # Error notifier by email
 class ErrorNotifier:
 
