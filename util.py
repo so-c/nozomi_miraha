@@ -59,7 +59,7 @@ class Holiday():
 
 class GreetingExpression():
     def __init__(self):
-        self.__morning_ge1 = re.compile(u'(おはよう?|オハヨウ?)(ー|〜)?')
+        self.__morning_ge1 = re.compile(u'(おはよ?う?|オハヨ?ウ?)(ー|〜)?')
         self.__morning_ge2 = re.compile(u'ぐっど?もーにんぐ?|グッド?モーニング?')
 
     def ismorninggreeting(self, text):

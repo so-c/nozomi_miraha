@@ -9,6 +9,12 @@ class TestGreetingExpression(unittest.TestCase):
         actual = ge.ismorninggreeting(u'おはよ')
         self.assertTrue(actual)
 
+        actual = ge.ismorninggreeting(u'おはー')
+        self.assertTrue(actual)
+
+        actual = ge.ismorninggreeting(u'おは〜')
+        self.assertTrue(actual)
+
         actual = ge.ismorninggreeting(u'おはよう')
         self.assertTrue(actual)
 
@@ -25,6 +31,12 @@ class TestGreetingExpression(unittest.TestCase):
         self.assertTrue(actual)
 
         actual = ge.ismorninggreeting(u'オハヨ')
+        self.assertTrue(actual)
+
+        actual = ge.ismorninggreeting(u'オハー')
+        self.assertTrue(actual)
+
+        actual = ge.ismorninggreeting(u'オハ〜')
         self.assertTrue(actual)
 
         actual = ge.ismorninggreeting(u'オハヨウ')
