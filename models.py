@@ -27,11 +27,22 @@ class Account:
         auth.set_access_token(access_token, access_token_secret)
         self.__api = tweepy.API(auth_handler=auth)
 
-    # tweet a messge.
+    # tweet a message.
     def tweet(self, message):
         try:
             self.__api.update_status(message)
             logging.info("tweeted " + message)
+        except TweepError as e:
+            message = ErrorNotifier()
+            error_message = '{0} when tweet "{1}"'.format(e.reason, message)
+            message.notify_error(error_message)
+            raise
+
+    # reply a message.
+    def reply(self, message, status_id):
+        assert '@' in message
+        try:
+            self.__api.update_status(message, in_reply_to_status_id=status_id)
         except TweepError as e:
             message = ErrorNotifier()
             error_message = '{0} when tweet "{1}"'.format(e.reason, message)
@@ -50,13 +61,13 @@ class Account:
         for f in followees_ids - followings_ids:
             self.__api.create_friendship(f)
 
-    # get following users id -> tweets dictionary
+    # get following users id -> 19 tweets dictionary
     def followings_timeline(self):
         followings_ids = self.__api.friends_ids()
         id_tweets = dict()
         for f in followings_ids:
             tweets = self.__api.get_user(f).timeline()
-            id_tweets[f] = [(t.id, t.text) for t in tweets]
+            id_tweets[f] = [(t.id, t.text, t.created_at) for t in tweets]
         return id_tweets
 
     # get following user's id -> name dictionary
