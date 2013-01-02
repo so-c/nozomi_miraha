@@ -4,6 +4,11 @@ cron:
   schedule: every day 07:00
   timezone: Asia/Tokyo
 
+- description: morning greeting
+  url: /reply-hello
+  schedule: every day 08:00
+  timezone: Asia/Tokyo
+
 - description: night greeting
   url: /good-night
   schedule: every day 23:00
