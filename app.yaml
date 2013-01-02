@@ -9,6 +9,10 @@ handlers:
   script: hello.app
   login: admin
 
+- url: /reply-hello
+  script: hello_replier.app
+  login: admin
+
 - url: /good-night
   script: goodnight.app
   login: admin
