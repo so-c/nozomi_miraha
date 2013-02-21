@@ -53,7 +53,7 @@ class Quote(webapp2.RequestHandler):
             return self.shorten_msg(line) + ' ' + link
 
     def shorten_msg(self, line):
-        len_limit = 140 - 20 - 1  # XXX remove magic number
+        len_limit = 140 - 22 - 1  # XXX remove magic number
         if(len(line) <= len_limit):
             return line
         else:

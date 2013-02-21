@@ -14,7 +14,7 @@ class TestQuote(unittest.TestCase):
         1234567890123456789012345678901234567890
         '''
         ss = quote.shorten_msg(s)
-        self.assertEquals(len(ss) + 1 + 20, 140)
+        self.assertEquals(len(ss) + 1 + 22, 140)
 
     def test_unduplicate_msg(self):
         blog = Blog('tests/data/feed.xml')
