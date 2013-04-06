@@ -6,7 +6,7 @@ from models import Account
 
 class Hello(webapp2.RequestHandler):
     def get(self):
-        weather = Weather(63, 'today')
+        weather = Weather(130010)
         telop = weather.get_telop()
 
         if telop.find(u'雨') != -1:

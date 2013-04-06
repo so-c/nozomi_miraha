@@ -1,6 +1,6 @@
 # coding: utf-8
 from google.appengine.api import mail
-from xml.dom import minidom
+import json
 from tweepy.error import TweepError
 from util import MirahaParser
 import ConfigParser
@@ -107,31 +107,25 @@ class ErrorNotifier:
 # Weather info
 # see http://weather.livedoor.com/weather_hacks/webservice.html
 class Weather:
-    __API_URL = 'http://weather.livedoor.com/forecast/webservice/rest/v1?city={0}&day={1}'
+    __API_URL = 'http://weather.livedoor.com/forecast/webservice/json/v1?city={0}'
 
-    def __init__(self, city_id, day):
-        options = ['today', 'tomorrow', 'dayaftertomorrow']
-        error_message = 'day must be "today", "tomorrow" or "dayaftertomorrow".'
-        if day not in options:
-            raise ValueError(error_message)
-
+    def __init__(self, city_id):
         self.__city_id = city_id
-        self.__day = day
 
-        self.__weather_xml = minidom.parse(urllib2.urlopen(self.get_url()))
+        self.__weather = json.loads(urllib2.urlopen(self.get_url()).read())
 
     def get_url(self):
-        return self.__API_URL.format(self.__city_id, self.__day)
+        return self.__API_URL.format(self.__city_id)
 
     def get_telop(self):
-        return self.__weather_xml.getElementsByTagName('telop')[0].firstChild.data
+        today_index = 0
+        return self.__weather.get('forecasts')[today_index].get('telop')
 
     def get_link(self):
-        return self.__weather_xml.getElementsByTagName('link')[0].firstChild.data
+        return self.__weather.get('link')
 
     def get_pref(self):
-        location = self.__weather_xml.getElementsByTagName('location')[0]
-        return location.attributes['pref'].value
+        return self.__weather.get('location').get('prefecture')
 
 # Blogg class including 25 posts
 class Blog:
