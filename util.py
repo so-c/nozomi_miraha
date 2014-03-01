@@ -43,7 +43,7 @@ class Holiday():
     def isholiday(self, dt):
         req = self.buildurl(dt)
         js = simplejson.load(urllib2.urlopen(req))
-        if 'items' in js:
+        if js['items']:
             return js['items'][0]['summary']
         else:
             return ''
