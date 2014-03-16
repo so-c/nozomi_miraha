@@ -28,7 +28,7 @@ class HelloReplier(webapp2.RequestHandler):
         greeting_expr = GreetingExpression()
         if not greeting_expr.ismorninggreeting(tweet):
             return False
-        if not u'@' in tweet:
+        if u'@' in tweet:
             return False
         today = datetime.datetime.combine(datetime.date.today(), datetime.time(0))
         if time < today:

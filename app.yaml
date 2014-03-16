@@ -24,6 +24,10 @@ handlers:
 - url: /refollow
   script: refollow.app
   login: admin
+  
+- url: /welcome-back
+  script: welcome_back.app
+  login: admin
 
 libraries:
 - name: webapp2
