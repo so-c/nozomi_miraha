@@ -21,5 +21,10 @@ cron:
 
 - description: welcome back to followers
   url: /welcome-back
-  schedule: every 15 mins from 08:00 to 22:00
+  schedule: every 5 mins
+  timezone: Asia/Tokyo
+  
+- description: refollow followee
+  url: /refollow
+  schedule: every 5 mins
   timezone: Asia/Tokyo
