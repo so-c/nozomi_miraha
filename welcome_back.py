@@ -33,7 +33,7 @@ class WelcomeBack(webapp2.RequestHandler):
             return False
 
         delta = datetime.datetime.now() - time
-        if delta.seconds >= 5 * 60:
+        if delta.total_seconds() >= 10 * 60:
             return False
         return True
 
