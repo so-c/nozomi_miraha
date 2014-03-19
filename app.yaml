@@ -34,3 +34,6 @@ libraries:
   version: "2.5.1"
 - name: django
   version: "1.4"
+- name: ssl
+  version: "latest"
+  
