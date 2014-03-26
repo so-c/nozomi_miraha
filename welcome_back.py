@@ -21,6 +21,9 @@ class WelcomeBack(webapp2.RequestHandler):
                 # if the tweets is imhome, reply to it
                 if self.is_reply(tweet, time):
                     msg = u'@' + screen_names[userid] + u' おかえりなさい、' + names[userid] + u'さん。'
+                    time = time + datetime.timedelta(hours=9)
+                    if time.hour >= 22:
+                        msg += '遅くまでお疲れ様でした。'
                     account.reply(msg, tweetid)
                     break
 
