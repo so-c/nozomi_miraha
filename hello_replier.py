@@ -51,4 +51,4 @@ class HelloReplier(webapp2.RequestHandler):
 
         return True
 
-app = webapp2.WSGIApplication([('/reply-hello', HelloReplier)], debug=True)
+app = webapp2.WSGIApplication([('/reply-hello', HelloReplier)], debug=false)
